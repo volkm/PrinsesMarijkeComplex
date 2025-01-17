@@ -1,4 +1,4 @@
-from "lib:cif3" import *;
+from "lib:cif" import *;
 
 tool int indent(int indentValue):
     indentValue = indentValue + 1;
@@ -38,7 +38,7 @@ tool removeUnamedLocations(string inFileLocation, string outFileLocation):
         // rewrite the file
         writefile(outFileLocation, line+"\n", append = true);
     end
-    cif3cif(outFileLocation,
+    cif2cif(outFileLocation,
     "-o", outFileLocation,
     "-t elim-consts," +
     "simplify-values");

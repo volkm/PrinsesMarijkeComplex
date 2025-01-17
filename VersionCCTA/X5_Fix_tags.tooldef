@@ -1,5 +1,5 @@
-from "Tooldefs/config.tooldef2" import *;
-from "Tooldefs/myToolbox.tooldef2" import *;
+from "Tooldefs/config.tooldef" import *;
+from "Tooldefs/myToolbox.tooldef" import *;
 
 // read and clear Ignition tag list
 list string file = readlines(tag_path());

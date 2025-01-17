@@ -1,21 +1,21 @@
-from "Tooldefs/config.tooldef2" import *;
-from "Tooldefs/myToolbox.tooldef2" import *;
+from "Tooldefs/config.tooldef" import *;
+from "Tooldefs/myToolbox.tooldef" import *;
 
 // Create directory for generated files.
 mkdir(gen_folder()+"/"+java_folder(), force=true);
 
 // Eliminate component definitions and algebraic variables as preprocessing.
-cif3cif(simulation(),
+cif2cif(simulation(),
         "-o", java_model(),
         "-t", "elim-comp-def-inst,elim-alg-vars");
 outln("Removed component definitions and event exclusion invariants.");
 
 // Merge simulation model and hardware mapping
-cif3merge(java_model(), hardware_sim(),
+cifmerge(java_model(), hardware_sim(),
         "-o", java_model());
 
 // Linearize the model.
-cif3cif(java_model(),
+cif2cif(java_model(),
     "-o", java_model(),
     "-t linearize-merge");
 outln("Linearized specification.");
@@ -25,7 +25,7 @@ removeUnamedLocations(java_model(), java_model());
 outln("Removed unamed locations.");
 
 // Generate Java code.
-cif3codegen(java_model(),
+cifcodegen(java_model(),
     "-l", "java",
     "-o", gen_folder()+"/"+java_folder(),
     "-p", java_class(),
